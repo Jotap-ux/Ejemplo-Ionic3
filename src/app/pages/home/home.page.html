@@ -17,24 +17,27 @@
   <div class="titulo">Formulario ingreso de datos</div>
   <!-- TEXTO FLOTANTE-->
   <div class="contenido">
-    <form>
+    <form [formGroup]="persona" (ngSubmit)="grabar()">
+      <!--Usamos los controles de formulario-->
       <ion-item>
-        <ion-label position="floating">Rut: {{rut}}</ion-label>
-        <ion-input></ion-input>
+        <ion-label position="floating">Rut: </ion-label>
+        <ion-input formControlName= "elRut"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Nombre Completo</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName= "elNombreCompleto"></ion-input>
       </ion-item>
       <ion-item>
         <ion-label position="floating">Edad</ion-label>
-        <ion-input></ion-input>
+        <ion-input formControlName= "laEdad"></ion-input>
       </ion-item>
 
-      <ion-button color="secondary">Grabar</ion-button>
-      <ion-button color="primary">Listar</ion-button>
-      <ion-button color="danger">Eliminar</ion-button>
+      <ion-button color="success" type=submit>Grabar</ion-button>
+      <ion-button color="primary" >Listar</ion-button>
+      <ion-button color="danger" >Eliminar</ion-button>
+
+      <ion-label>Listado</ion-label>
     </form>
   </div>
-  <ion-label>Listado</ion-label>
+
 </ion-content>
