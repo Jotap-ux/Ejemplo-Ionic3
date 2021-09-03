@@ -1,9 +1,41 @@
-<ion-header>
+<ion-header [translucent]="true">
   <ion-toolbar>
-    <ion-title>ejemplo2</ion-title>
+    <ion-title>
+      TRASPASOS DE DATOS
+    </ion-title>
   </ion-toolbar>
 </ion-header>
 
-<ion-content>
+<ion-content [fullscreen]="true">
+  <ion-header collapse="condense">
+    <ion-toolbar>
+      <ion-title size="large">TRASPASOS</ion-title>
+    </ion-toolbar>
+  </ion-header>
+  <!-- Input with placeholder
+  <ion-input placeholder="Enter Input"></ion-input> -->
+  <div class="titulo">Formulario modificacion de datos</div>
+  <!-- TEXTO FLOTANTE-->
+  <div class="contenido">
+    <form [formGroup]="persona">
+      <!--Usamos los controles de formulario-->
+      <ion-item>
+        <ion-label>Rut : </ion-label>
+        <ion-input formControlName= "elRut">{{perso.rut}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Nombre Completo : </ion-label>
+        <ion-input formControlName= "elNombreCompleto">{{perso.nombre}}</ion-input>
+      </ion-item>
+      <ion-item>
+        <ion-label>Edad : </ion-label>
+        <ion-input formControlName= "laEdad">{{perso.edad}}</ion-input>
+      </ion-item>
+
+      <ion-button color="success" type=submit>Modificar</ion-button>
+      <ion-button color="primary" routerLink="/ejemplo1" >Listar</ion-button>
+      
+    </form>
+  </div>
 
 </ion-content>

@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AlertController } from '@ionic/angular'; //importamos controlador para las alertas
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-ejemplo1',
@@ -8,7 +9,7 @@ import { AlertController } from '@ionic/angular'; //importamos controlador para 
 })
 export class Ejemplo1Page implements OnInit {
 
-  constructor(private alertController: AlertController) { }
+  constructor(private router :Router, private alertController: AlertController) { }
 
   //llamamos al metodo listar
   ngOnInit() {
@@ -72,14 +73,44 @@ export class Ejemplo1Page implements OnInit {
     nombre:"maria",
     edad:66
   }];
+
   //metodos (con parametros!!)
   eliminar(rut:String){
-    alert('seleccionó eliminar'+rut);
+
+
+
+    var datos= localStorage.getItem('misdatos');
+
+    //reemplazamos datos del registro para que se vea mas bonito, sin comas, etc!
+    datos = datos.replace('[','');
+    datos = datos.replace(']','');
+    datos = datos.split('},{').join('};{'); 
+ 
+    var arreglo_temp= datos.split(";");
+    var per;
+    var lista_temporal = new Array();
+    for (let index = 0; index < arreglo_temp.length; index++) {
+      var registro = arreglo_temp[index];
+      var la_persona = JSON.parse(registro);
+      per={
+        rut: la_persona.rut,
+        nombre: la_persona.nombre,
+        edad: la_persona.edad
+      };
+      if (la_persona.rut != rut) {
+        lista_temporal.push(per);
+      }
+    }
+    this.lista_personas=lista_temporal;
+    localStorage.setItem('misdatos',JSON.stringify(lista_temporal));
   }
 
   actualizar(rut:String){
     alert('seleccionó actualizar'+rut);
+    this.router.navigate(['/ejemplo2',rut]); //para que nos mande a la pagina ejemplo2 a actualizar los datos!!
   }
+
+
 
   listar(){
     var datos= localStorage.getItem('misdatos');
@@ -87,9 +118,22 @@ export class Ejemplo1Page implements OnInit {
     //reemplazamos datos del registro para que se vea mas bonito, sin comas, etc!
     datos = datos.replace('[','');
     datos = datos.replace(']','');
+    datos = datos.split('},{').join('};{'); 
+ 
+    var arreglo_temp= datos.split(";");
+    var per;
+    var lista_temporal = new Array();
+    for (let index = 0; index < arreglo_temp.length; index++) {
+      var registro = arreglo_temp[index];
+      var la_persona = JSON.parse(registro);
+      per={
+        rut: la_persona.rut,
+        nombre: la_persona.nombre
+      };
 
-    datos = datos.split('},{').join('};{');
-    
-    alert(datos);
+      lista_temporal.push(per);
+    }
+    this.lista_personas=lista_temporal;
+
   }
 }
