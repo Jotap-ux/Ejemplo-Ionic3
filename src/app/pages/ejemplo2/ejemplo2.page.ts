@@ -23,9 +23,7 @@ export class Ejemplo2Page implements OnInit {
   });
 
   perso:any={
-    rut:'23456',
-    nombre:'jose pedro',
-    edad:'32'
+    rut:'23456'
   }
 
   //METODO BUSCAR**************
@@ -42,10 +40,9 @@ export class Ejemplo2Page implements OnInit {
       var la_persona = JSON.parse(registro);
       if (la_persona.rut == rut) {
         this.perso={
-          rut: la_persona.rut,
-          nombre: la_persona.nombre,
-          edad: la_persona.edad
+          rut: la_persona.rut
         };
+        this.persona.controls.elNombreCompleto.setValue(la_persona.nombre)
       }
     }
   }
